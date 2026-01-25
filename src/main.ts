@@ -1,6 +1,6 @@
 import "@/index.css"
-import { coreModule, definePlugin, requireDepend, uni, Utils, type PluginConfigSearchTabbar, type PluginConfigSubscribe } from "delta-comic-core"
-import { pluginName } from "./symbol"
+import { definePlugin, requireDepend, uni, Utils, type PluginConfigSearchTabbar, type PluginConfigSubscribe } from "delta-comic-core"
+import { layoutModule, pluginName } from "./symbol"
 import { AES, MD5, enc, mode, pad } from 'crypto-js'
 import { api, image } from "./api/forks"
 import { first, inRange, isEmpty, isString } from 'es-toolkit/compat'
@@ -21,7 +21,7 @@ const testAxios = axios.create({
     return inRange(status, 199, 499)
   },
 })
-const { layout } = requireDepend(coreModule)
+const { layout } = requireDepend(layoutModule)
 testAxios.interceptors.response.use(undefined, Utils.request.utilInterceptors.createAutoRetry(testAxios, 2))
 definePlugin({
   name: pluginName,
@@ -34,7 +34,10 @@ definePlugin({
   resource: {
     types: [{
       type: 'default',
-      test: (url, signal) => axios.get(`${url}/videos/tmb/30859/0.jpg`, { signal }),
+      test: async (url, signal) => {
+        const body = await fetch(`${url}/videos/tmb/30859/0.jpg`, { signal })
+        if (!body.ok) throw new Error('fail to connect')
+      },
       urls: image
     }]
   },

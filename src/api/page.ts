@@ -1,9 +1,9 @@
-import { pluginName } from "@/symbol"
-import { coreModule, requireDepend, uni, Utils } from "delta-comic-core"
+import { layoutModule, pluginName } from "@/symbol"
+import { requireDepend, uni, Utils } from "delta-comic-core"
 import { cosav } from "."
 import { createCommonComicToItem, createCommonVideoToItem } from "./api/utils"
 import { until } from "@vueuse/core"
-const { view } = requireDepend(coreModule)
+const { view } = requireDepend(layoutModule)
 export class CosavVideoPage extends uni.content.ContentVideoPage {
   public static contentType = uni.content.ContentPage.contentPage.toString([pluginName, 'video'])
   override contentType = uni.content.ContentPage.contentPage.toJSON(CosavVideoPage.contentType)
@@ -11,7 +11,7 @@ export class CosavVideoPage extends uni.content.ContentVideoPage {
     return
   })
   override loadAll(signal?: AbortSignal): Promise<any> {
-    this.pid.resolve(this.ep)
+    this.pid.resolve(`cv${this.ep}`)
     return Promise.all([
       this.eps.content.isLoading.value || this.eps.content.loadPromise(this.loadEps(signal)),
       this.detail.content.isLoading.value || this.detail.content.loadPromise(cosav.api.video.getInfo(this.ep, signal).then((v: cosav.video.CosavVideo) => {
@@ -65,7 +65,7 @@ export class CosavComicPage extends uni.content.ContentImagePage {
     return
   })
   override loadAll(signal?: AbortSignal) {
-    this.pid.resolve(this.ep)
+    this.pid.resolve(`c1${this.ep}`)
     return Promise.all([
       this.detail.content.isLoading.value || this.detail.content.loadPromise(cosav.api.comic.getInfo(this.ep, signal).then(v => {
         const raw = v.$$meta.raw as cosav.comic.RawFullComic
@@ -89,5 +89,5 @@ export class CosavComicPage extends uni.content.ContentImagePage {
   override exportOffline(): Promise<never> {
     throw new Error("Method not implemented.")
   }
-  override ViewComp = view.Images
+  override ViewComp = view.Image
 }

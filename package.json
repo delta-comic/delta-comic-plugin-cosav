@@ -27,6 +27,7 @@
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.18",
     "delta-comic-core": "file:../delta-comic-core/dist/pack.tgz",
+    "delta-comic-plugin-layout": "github:delta-comic/delta-comic-plugin-layout",
     "es-toolkit": "^1.40.0",
     "naive-ui": "^2.43.1",
     "vant": "^4.9.21",
