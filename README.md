@@ -1,6 +1,7 @@
 # Delta Comic Plugin Cosav - _<span style="font-weight: lighter;font-size:16px">何以殁亡</span>_
 
 [![GitHub](https://img.shields.io/github/license/delta-comic/delta-comic-plugin-cosav)](https://raw.githubusercontent.com/delta-comic/delta-comic-plugin-cosav/main/LICENSE)
+![Download](https://img.shields.io/github/downloads/delta-comic/delta-comic-plugin-cosav/total)
 
 - [delta-comic](https://github.com/delta-comic/delta-comic)的插件
 
