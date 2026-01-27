@@ -53,7 +53,7 @@ definePlugin({
           const key = Date.now().toString()
           const tokenParam = `CosAppMakeBigMoney,${Math.floor(Date.now() / 1000)}`
           requestConfig.cosav_key = key
-          requestConfig.headers.set('userParams', '')
+          requestConfig.headers.set('User-Params', '')
           requestConfig.headers.set('Tokenparam', tokenParam)
           requestConfig.headers.set('Use-interface', requestConfig.baseURL)
           return requestConfig
@@ -81,6 +81,10 @@ definePlugin({
       cosavStore.api.value = api
       Utils.eventBus.SharedFunction.define(s => cosav.api.search.getRandomVideo(s), pluginName, 'getRandomProvide')
       Utils.eventBus.SharedFunction.define(s => cosav.api.search.getRandomComic(s), pluginName, 'getRandomProvide')
+      return {
+        api,
+        cosav
+      }
     }
   },
   content: {
