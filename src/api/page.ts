@@ -54,7 +54,7 @@ export class CosavVideoPage extends uni.content.ContentVideoPage {
   override exportOffline(): Promise<never> {
     throw new Error("Method not implemented.")
   }
-  override ViewComp = view.Video
+  override ViewComp = view.Video as any
 }
 
 
@@ -89,5 +89,5 @@ export class CosavComicPage extends uni.content.ContentImagePage {
   override exportOffline(): Promise<never> {
     throw new Error("Method not implemented.")
   }
-  override ViewComp = view.Image
+  override ViewComp = view.Image as any
 }

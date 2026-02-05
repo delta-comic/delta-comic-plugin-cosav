@@ -6,10 +6,10 @@
     "name": "wenxig",
     "email": "wenxinguo12@gmail.com"
   },
-  "homepage": "https://github.com/wenxig/delta-comic-plugin-cosav",
+  "homepage": "https://github.com/delta-comic/delta-comic-plugin-cosav",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wenxig/delta-comic-plugin-cosav.git"
+    "url": "https://github.com/delta-comic/delta-comic-plugin-cosav.git"
   },
   "license": "AGPL-3.0-only",
   "type": "module",
@@ -32,7 +32,7 @@
     "naive-ui": "^2.43.1",
     "vant": "^4.9.21",
     "vue": "^3.5.22",
-    "vue-router": "^4.6.3"
+    "vue-router": "^5.0.2"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.14",
@@ -44,14 +44,20 @@
     "lightningcss": "^1.30.2",
     "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3",
-    "unplugin-vue-components": "30.0.0",
-    "vite": "^7.3.0",
+    "unplugin-vue-components": "31.0.0",
+    "vite": "^8.0.0-beta.11",
     "vite-plugin-external": "^6.2.2",
     "vite-plugin-monkey": "^7.1.4",
     "vue-component-type-helpers": "^3.1.1",
     "vue-tsc": "^3.1.1"
   },
+  "overrides": {
+    "vite": "^8.0.0-beta.11"
+  },
   "pnpm": {
+    "overrides": {
+      "vite": "^8.0.0-beta.11"
+    },
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "@tailwindcss/oxide",
