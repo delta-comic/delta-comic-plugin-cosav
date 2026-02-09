@@ -68,7 +68,6 @@ void definePlugin({
           ins.interceptors.request.use(async requestConfig => {
             const key = Date.now().toString()
             const tokenParam = `CosAppMakeBigMoney,${Math.floor(Date.now() / 1000)}`
-            requestConfig.cosav_key = key
             requestConfig.headers.set('User-Params', '')
             requestConfig.headers.set('Tokenparam', tokenParam)
             requestConfig.headers.set('Use-interface', requestConfig.baseURL)
