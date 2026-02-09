@@ -1,90 +1,62 @@
 name: 构建和发布
 
 on:
-  push: 
-    branches: ["master"]
+  push:
+    branches: ['master']
 
 permissions:
   contents: write
-  
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ github.event.head_commit && contains(github.event.head_commit.message, '[pub]') }}
     env:
       ENV_STATE: github
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v6
         with:
-          node-version: 24
-          # cache: 'pnpm'                     
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Configure git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 10.17.1
-          
-      - name: Restore cached Primes
-        id: cache-primes-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-cosav
+          version: 10.27.0
 
-      - name: Change depends
-        run: sh ./script/install.sh
-      
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install
+
+      # build
+      - name: Change version
+        id: set-version
+        run: |
+          OLD_VERSION="$(node ./script/update-version.mts)"
+          echo "old_version=$OLD_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Build
         run: pnpm run build
-        
-      - name: Restore cached Primes
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            node_modules
-          key: ${{ steps.cache-primes-restore.outputs.cache-primary-key }}
 
-      - name: Prepare tag/name/body variables
-        id: vars
-        shell: bash
+      - name: Restore version
         run: |
-          # Determine TAG:
-          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            TAG="${GITHUB_REF#refs/tags/}"
-          else
-            TAG="release-${GITHUB_RUN_NUMBER}-$(echo ${GITHUB_SHA} | cut -c1-7)"
-          fi
+          node ./script/set-version.mts ${{ steps.set-version.outputs.old_version }}
 
-          # Name and body
-          NAME="Release $TAG"
-            # Use the latest commit's subject and link as release body
-            COMMIT_SHA="${GITHUB_SHA}"
-            SHORT_SHA="${COMMIT_SHA:0:7}"
-            COMMIT_SUBJECT="$(git --no-pager log -1 --pretty=format:'%s' "$COMMIT_SHA" 2>/dev/null || echo 'No commit message')"
-            BODY="Commit ${SHORT_SHA} — ${COMMIT_SUBJECT} (${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${COMMIT_SHA})"
-          # expose outputs
-          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-          echo "name=$NAME" >> "$GITHUB_OUTPUT"
-          echo "body=$BODY" >> "$GITHUB_OUTPUT"
-
-      - name: Release
-        uses: softprops/action-gh-release@v2
+      #publish
+      - name: Run semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: |
-           ./dist/delta-comic-plugin-cosav.user.js
-          tag_name: ${{ steps.vars.outputs.tag }}
-          name: ${{ steps.vars.outputs.name }}
-          body: ${{ steps.vars.outputs.body }}
-          repository: ${{ github.repository }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          make_latest: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 用于在 GitHub 上创建 release 与 tag
+          DEBUG: semantic-release:*
+        run: pnpm exec semantic-release
