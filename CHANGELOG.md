@@ -1,3 +1,15 @@
+# [0.2.0](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.1.1...0.2.0) (2026-02-09)
+
+
+### Bug Fixes
+
+* **ci:** release file [pub] ([8dfa2aa](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/8dfa2aa3bedbf9d67898eb8a41dab046c7fd6a29))
+
+
+### Features
+
+* [pub] better video default aspect ([bffa96b](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/bffa96bc4f4575fea5ccf4dd7ed99925f546b93d))
+
 ## [0.1.1](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.1.0...0.1.1) (2026-02-09)
 
 
