@@ -78,8 +78,9 @@ export const createCommonVideoToItem = (v: _cosavVideo.RawCommonVideo) =>
       ),
     cover: {
       $$plugin: pluginName,
-      type: 'default',
-      pathname: new URL(v.photo).pathname.replaceAll('/media', '')
+      $$meta: { width: 16, height: 9 },
+      forkNamespace: 'default',
+      path: new URL(v.photo).pathname.replaceAll('/media', '')
     },
     customIsAI: false,
     likeNumber: Number(v.likes),
@@ -126,8 +127,9 @@ export const createFullVideoToItem = (v: _cosavVideo.RawFullVideo) =>
       ),
     cover: {
       $$plugin: pluginName,
-      type: 'default',
-      pathname: new URL(v.photo).pathname.replaceAll('/media', '')
+      $$meta: { width: 16, height: 9 },
+      forkNamespace: 'default',
+      path: new URL(v.photo).pathname.replaceAll('/media', '')
     },
     customIsAI: false,
     likeNumber: Number(v.likes),

@@ -66,7 +66,6 @@ void definePlugin({
           const key = MD5(cosKey).toString()
           const keyHex = enc.Utf8.parse(key)
           ins.interceptors.request.use(async requestConfig => {
-            const key = Date.now().toString()
             const tokenParam = `CosAppMakeBigMoney,${Math.floor(Date.now() / 1000)}`
             requestConfig.headers.set('User-Params', '')
             requestConfig.headers.set('Tokenparam', tokenParam)
