@@ -1,7 +1,7 @@
 import pkg from './package.json' with { type: 'json' }
 /** @type {import("semantic-release").GlobalConfig} */
 export default {
-  branches: ['main'],
+  branches: ['master'],
   repositoryUrl: pkg.repository.url,
   plugins: [
     '@semantic-release/commit-analyzer',
