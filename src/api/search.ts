@@ -1,6 +1,7 @@
-import type { cosav } from "."
-import { _cosavVideo } from "./video"
-import { createCommonVideoToItem } from "./api/utils"
+import type { cosav } from '.'
+
+import { createCommonVideoToItem } from './api/utils'
+import { _cosavVideo } from './video'
 
 export namespace _cosavSearch {
   export interface CategoriesItem {
@@ -23,16 +24,8 @@ export namespace _cosavSearch {
   }
 
   export interface RawSettings {
-    header_banner: {
-      link: string
-      image: string
-      adv_sale_type: 'own' | 'sale'
-    }[]
-    game_banners: {
-      link: string
-      image: string
-      adv_sale_type: 'own' | 'sale'
-    }[]
+    header_banner: { link: string; image: string; adv_sale_type: 'own' | 'sale' }[]
+    game_banners: { link: string; image: string; adv_sale_type: 'own' | 'sale' }[]
     api_host: string
     img_host: string
     base_url: string
@@ -48,17 +41,10 @@ export namespace _cosavSearch {
     index_page: {
       key: string
       name: string
-      more: {
-        tags: string
-        order: cosav.SortType
-      },
+      more: { tags: string; order: cosav.SortType }
       list: _cosavVideo.RawCommonVideo[]
     }[]
-    social_media: {
-      neme: string
-      link: string
-      icon: string
-    }[]
+    social_media: { neme: string; link: string; icon: string }[]
     version: string
     test_version: string
     ios_version: string
@@ -73,19 +59,10 @@ export namespace _cosavSearch {
     react_ios_version: string
     react_ios_test_version: string
     react_version_info: string
-
   }
   export class Settings implements RawSettings {
-    public header_banner: {
-      link: string
-      image: string
-      adv_sale_type: 'own' | 'sale'
-    }[]
-    public game_banners: {
-      link: string
-      image: string
-      adv_sale_type: 'own' | 'sale'
-    }[]
+    public header_banner: { link: string; image: string; adv_sale_type: 'own' | 'sale' }[]
+    public game_banners: { link: string; image: string; adv_sale_type: 'own' | 'sale' }[]
     public api_host: string
     public img_host: string
     public base_url: string
@@ -101,19 +78,13 @@ export namespace _cosavSearch {
     public index_page: {
       key: string
       name: string
-      more: {
-        tags: string
-        order: cosav.SortType
-      },
+      more: { tags: string; order: cosav.SortType }
       list: _cosavVideo.RawCommonVideo[]
     }[]
     public get $index_page() {
       const v = this.index_page
       return v.map(v => {
-        return {
-          ...v,
-          list: v.list.map(createCommonVideoToItem)
-        }
+        return { ...v, list: v.list.map(createCommonVideoToItem) }
       })
     }
     public social_media: {

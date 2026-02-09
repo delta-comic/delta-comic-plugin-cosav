@@ -1,4 +1,4 @@
-import { uni } from "delta-comic-core"
+import { uni } from 'delta-comic-core'
 
 export namespace _cosavComic {
   export interface RawCommonComic {
@@ -45,20 +45,18 @@ export namespace _cosavComic {
   }
 
   export class CosavComic extends uni.item.Item {
-    override $$meta: {
-      raw: RawFullComic | RawCommonComic
-    }
+    override $$meta: { raw: RawFullComic | RawCommonComic }
     override like(_signal?: AbortSignal): PromiseLike<boolean> {
       window.$message.info('该内容无法点赞')
-      throw new Error("Method not implemented.")
+      throw new Error('Method not implemented.')
     }
     override report(_signal?: AbortSignal): PromiseLike<any> {
       window.$message.info('该内容无法举报')
-      throw new Error("Method not implemented.")
+      throw new Error('Method not implemented.')
     }
     override sendComment(_text: string, _signal?: AbortSignal): PromiseLike<any> {
       window.$message.info('该内容无法发送评论')
-      throw new Error("Method not implemented.")
+      throw new Error('Method not implemented.')
     }
     constructor(v: uni.item.RawItem) {
       super(v)

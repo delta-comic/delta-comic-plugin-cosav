@@ -1,10 +1,12 @@
 import type { Style } from '@capacitor/status-bar'
-import { type useMessage, type useLoadingBar, type useDialog } from 'naive-ui'
 import type { Router } from 'vue-router'
+
+import { type useMessage, type useLoadingBar, type useDialog } from 'naive-ui'
+import { Component } from 'vue'
+
+import { ExternalLibKey } from '../external'
 import { uni } from './struct'
 import { Utils } from './utils'
-import { Component } from 'vue'
-import { ExternalLibKey } from '../external'
 declare global {
   interface Window {
     $message: ReturnType<typeof useMessage>
@@ -17,10 +19,7 @@ declare global {
     $layout: Record<string, uni.content.ViewLayoutComp>
     $view: Record<string, uni.content.ViewComp>
     $comp: {
-      Comment: Component<{
-        item: uni.item.Item
-        comments: Utils.data.RStream<uni.comment.Comment>
-      }>
+      Comment: Component<{ item: uni.item.Item; comments: Utils.data.RStream<uni.comment.Comment> }>
     }
     $isDev: boolean
   }
@@ -36,18 +35,11 @@ declare module 'axios' {
 
 export declare module 'vue-router' {
   interface Router {
-    force: {
-      push: Router['push']
-      replace: Router['replace']
-    }
+    force: { push: Router['push']; replace: Router['replace'] }
   }
   interface RouteMeta {
-    statusBar?: {
-      overlaysWebView?: boolean
-      style?: Style
-      backgroundColor?: string
-    }
+    statusBar?: { overlaysWebView?: boolean; style?: Style; backgroundColor?: string }
     force?: boolean
   }
 }
-export { }
+export {}

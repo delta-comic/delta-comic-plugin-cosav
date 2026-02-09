@@ -15,14 +15,14 @@
 
 ## 想要编写插件?
 
- [![Readme Card](https://wenxig-grs.vercel.app/api/pin/?username=delta-comic&repo=delta-comic-core&user&theme=transparent)](https://github.com/delta-comic/delta-comic-core)  
+[![Readme Card](https://wenxig-grs.vercel.app/api/pin/?username=delta-comic&repo=delta-comic-core&user&theme=transparent)](https://github.com/delta-comic/delta-comic-core)  
  该包可为你提供许多基本的数据结构, 与便捷的`definePlugin`
 
 ## 源项目
 
 ### Delta Comic
 
-   [![Readme Card](https://wenxig-grs.vercel.app/api/pin/?username=delta-comic&repo=delta-comic&user&theme=transparent)](https://github.com/delta-comic/delta-comic)  
+[![Readme Card](https://wenxig-grs.vercel.app/api/pin/?username=delta-comic&repo=delta-comic&user&theme=transparent)](https://github.com/delta-comic/delta-comic)
 
 ## Star History
 

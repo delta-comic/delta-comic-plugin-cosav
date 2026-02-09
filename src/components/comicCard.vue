@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import { LikeOutlined } from '@vicons/antd'
 import { AccessTimeRound, DrawOutlined } from '@vicons/material'
 import { coreModule, requireDepend, uni, Utils } from 'delta-comic-core'
@@ -8,15 +8,15 @@ const $props = defineProps<{
   item: uni.item.Item
   freeHeight?: boolean
   disabled?: boolean
-  type?: "default" | "big" | "small"
+  type?: 'default' | 'big' | 'small'
   class?: any
   style?: StyleValue
 }>()
-const $emit = defineEmits<{
-  click: [item: uni.item.Item]
-}>()
+const $emit = defineEmits<{ click: [item: uni.item.Item] }>()
 
-const { comp: { ItemCard } } = requireDepend(coreModule)
+const {
+  comp: { ItemCard }
+} = requireDepend(coreModule)
 </script>
 
 <template>
@@ -33,29 +33,31 @@ const { comp: { ItemCard } } = requireDepend(coreModule)
         <span>{{ item.likeNumber }}</span>
       </span>
     </template>
-    <div class="flex gap-0.5 items-center" v-if="item.author.length && type == 'small'">
+    <div class="flex items-center gap-0.5" v-if="item.author.length && type == 'small'">
       <NIcon color="var(--van-text-color-2)" size="14px">
         <DrawOutlined />
       </NIcon>
-      <span class="ml-0.5 text-xs van-ellipsis w-full text-(--van-text-color-2)">
+      <span class="van-ellipsis ml-0.5 w-full text-xs text-(--van-text-color-2)">
         {{ item.author[0].label }}
-        <template v-if="item.author.length > 1">
-          等联合创作
-        </template>
+        <template v-if="item.author.length > 1"> 等联合创作 </template>
       </span>
     </div>
     <template v-if="type != 'small'">
       <div class="flex gap-0.5 **:text-nowrap">
-        <VanTag type="primary" plain v-for="category of uniqBy(item.categories, v => v.name)">{{ category.name }}</VanTag>
+        <VanTag type="primary" plain v-for="category of uniqBy(item.categories, v => v.name)">{{
+          category.name
+        }}</VanTag>
       </div>
-      <div class="flex flex-nowrap items-center *:text-nowrap van-ellipsis mt-0.5"
-        v-if="item.$updateTime.get('year') != 1970">
+      <div
+        class="van-ellipsis mt-0.5 flex flex-nowrap items-center *:text-nowrap"
+        v-if="item.$updateTime.get('year') != 1970"
+      >
         <NIcon color="var(--van-text-color-2)" size="14px">
           <AccessTimeRound />
         </NIcon>
         <span class="mr-2">{{ Utils.translate.createDateString(item.$updateTime) }}</span>
       </div>
-      <div class="flex flex-nowrap items-center *:text-nowrap van-ellipsis">
+      <div class="van-ellipsis flex flex-nowrap items-center *:text-nowrap">
         <NIcon color="var(--van-text-color-2)" size="14px">
           <DrawOutlined />
         </NIcon>

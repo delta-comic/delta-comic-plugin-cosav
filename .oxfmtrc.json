@@ -16,7 +16,7 @@
   "experimentalTailwindcss": {
     "preserveDuplicates": false,
     "preserveWhitespace": false,
-    "stylesheet": "./lib/index.css"
+    "stylesheet": "./src/index.css"
   },
   "experimentalSortImports": {},
   "bracketSameLine": false,

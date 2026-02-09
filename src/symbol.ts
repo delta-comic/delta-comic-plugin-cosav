@@ -1,5 +1,6 @@
-import { declareDependType } from "delta-comic-core"
-import type { LayoutPlugin } from "delta-comic-plugin-layout"
+import type { LayoutPlugin } from 'delta-comic-plugin-layout'
+
+import { declareDependType } from 'delta-comic-core'
 
 export const pluginName = 'cosav'
 
