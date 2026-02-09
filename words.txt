@@ -56,3 +56,16 @@ previewable
 disretry
 splited
 relogin
+cosav
+Tokenparam
+neme
+mpegurl
+cnxh
+lastpage
+viewnumber
+addtime
+adddate
+addtimestamp
+coser
+albuminfo
+videoinfo
