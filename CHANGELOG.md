@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.1.0...0.1.1) (2026-02-09)
+
+
+### Performance Improvements
+
+* lint & fmt ([1d8baf7](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/1d8baf74d7850905379e0e9c4ccc1fffc08bbba2))
+
 # [0.1.0](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.0.1...0.1.0) (2026-02-09)
 
 ### Bug Fixes
