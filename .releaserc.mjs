@@ -7,7 +7,7 @@ export default {
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
     ['@semantic-release/changelog', { changelogFile: 'CHANGELOG.md' }],
-    '@semantic-release/github',
+    ['@semantic-release/github', { assets: ['dist/*'] }],
     [
       '@semantic-release/git',
       {
