@@ -1,4 +1,4 @@
-import { uni, Utils } from 'delta-comic-core'
+import { PromiseContent, uni } from '@delta-comic/model'
 
 import { cosavStore } from '@/store'
 import { pluginName } from '@/symbol'
@@ -8,7 +8,6 @@ import type { cosav } from '..'
 import { createFullComicToItem } from './utils'
 
 export namespace _cosavApiComic {
-  const { PromiseContent } = Utils.data
   export const getInfo = PromiseContent.fromAsyncFunction((id: string, signal?: AbortSignal) =>
     cosavStore.api
       .value!.get<cosav.comic.RawFullComic>('/albums/albuminfo', { signal, params: { id } })

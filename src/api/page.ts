@@ -1,15 +1,19 @@
+import { Stream, uni } from '@delta-comic/model'
+import { require } from '@delta-comic/plugin'
 import { until } from '@vueuse/core'
-import { requireDepend, uni, Utils } from 'delta-comic-core'
 
 import { layoutModule, pluginName } from '@/symbol'
 
 import { cosav } from '.'
 import { createCommonComicToItem, createCommonVideoToItem } from './api/utils'
-const { view } = requireDepend(layoutModule)
-export class CosavVideoPage extends uni.content.ContentVideoPage {
+const {
+  view,
+  model: { ContentImagePage, ContentVideoPage }
+} = require(layoutModule)
+export class CosavVideoPage extends ContentVideoPage {
   public static contentType = uni.content.ContentPage.contentPage.toString([pluginName, 'video'])
   override contentType = uni.content.ContentPage.contentPage.toJSON(CosavVideoPage.contentType)
-  override comments = Utils.data.Stream.create<uni.comment.Comment>(function* () {
+  override comments = Stream.create<uni.comment.Comment>(function* () {
     return
   })
   override loadAll(signal?: AbortSignal): Promise<any> {
@@ -64,10 +68,10 @@ export class CosavVideoPage extends uni.content.ContentVideoPage {
   override ViewComp = view.Video as any
 }
 
-export class CosavComicPage extends uni.content.ContentImagePage {
+export class CosavComicPage extends ContentImagePage {
   public static contentType = uni.content.ContentPage.contentPage.toString([pluginName, 'comic'])
   override contentType = uni.content.ContentPage.contentPage.toJSON(CosavVideoPage.contentType)
-  override comments = Utils.data.Stream.create<uni.comment.Comment>(function* () {
+  override comments = Stream.create<uni.comment.Comment>(function* () {
     return
   })
   override loadAll(signal?: AbortSignal) {

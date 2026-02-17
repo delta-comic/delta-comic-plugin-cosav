@@ -1,16 +1,19 @@
 import '@/index.css'
+import { SharedFunction } from '@delta-comic/core'
+import { PromiseContent, Stream, uni } from '@delta-comic/model'
+import {
+  definePlugin,
+  Global,
+  require,
+  type PluginExpose,
+  type Search,
+  type Subscribe
+} from '@delta-comic/plugin'
+import { createAxios, interceptors } from '@delta-comic/request'
 import { UserOutlined } from '@vicons/antd'
 import { SearchOutlined } from '@vicons/material'
 import axios, { formToJSON } from 'axios'
 import { AES, MD5, enc, mode, pad } from 'crypto-js'
-import {
-  definePlugin,
-  requireDepend,
-  uni,
-  Utils,
-  type PluginConfigSearchTabbar,
-  type PluginConfigSubscribe
-} from 'delta-comic-core'
 import { first, inRange, isEmpty, isString } from 'es-toolkit/compat'
 
 import { cosav } from './api'
@@ -29,12 +32,9 @@ const testAxios = axios.create({
     return inRange(status, 199, 499)
   }
 })
-const { layout } = requireDepend(layoutModule)
-testAxios.interceptors.response.use(
-  undefined,
-  Utils.request.utilInterceptors.createAutoRetry(testAxios, 2)
-)
-void definePlugin({
+const { layout } = require(layoutModule)
+testAxios.interceptors.response.use(undefined, interceptors.createAutoRetry(testAxios, 2))
+const plugin = definePlugin({
   name: pluginName,
   api: {
     api: {
@@ -58,7 +58,7 @@ void definePlugin({
     console.log('setup...', ins, ins.api?.api)
     if (ins.api?.api) {
       const f = ins.api.api
-      const api = Utils.request.createAxios(
+      const api = createAxios(
         () => f,
         {},
         ins => {
@@ -92,16 +92,8 @@ void definePlugin({
         }
       )
       cosavStore.api.value = api
-      Utils.eventBus.SharedFunction.define(
-        s => cosav.api.search.getRandomVideo(s),
-        pluginName,
-        'getRandomProvide'
-      )
-      Utils.eventBus.SharedFunction.define(
-        s => cosav.api.search.getRandomComic(s),
-        pluginName,
-        'getRandomProvide'
-      )
+      SharedFunction.define(s => cosav.api.search.getRandomVideo(s), pluginName, 'getRandomProvide')
+      SharedFunction.define(s => cosav.api.search.getRandomComic(s), pluginName, 'getRandomProvide')
       return { api, cosav }
     }
   },
@@ -131,20 +123,18 @@ void definePlugin({
           ])
           cosavStore.settings.value = settings
           for (const page of settings.$index_page) {
-            uni.content.ContentPage.addMainList(pluginName, {
-              content: () => Utils.data.PromiseContent.resolve(page.list),
+            Global.addMainList(pluginName, {
+              content: () => PromiseContent.resolve(page.list),
               name: page.name,
               onClick() {
-                return Utils.eventBus.SharedFunction.call('routeToSearch', '')
+                return SharedFunction.call('routeToSearch', '')
               }
             })
           }
           cosavStore.categories.value = categories
-          uni.content.ContentPage.addTabbar(
+          Global.addTabbar(
             pluginName,
-            ...categories.map(
-              v => <PluginConfigSearchTabbar>{ comp: Tabbar, id: v.CHID, title: v.name }
-            )
+            ...categories.map(v => <Search.Tabbar>{ comp: Tabbar, id: v.CHID, title: v.name })
           )
           setDescription('成功')
         } catch (error) {
@@ -186,24 +176,18 @@ void definePlugin({
     hotPage: { levelBoard: cosav.api.search.getLevelboard() }
   },
   user: {
-    authorActions: {
+    userActions: {
       search_comic: {
         name: '搜索该coser',
         call(author) {
-          return Utils.eventBus.SharedFunction.call('routeToSearch', author.label, [
-            pluginName,
-            'cos'
-          ])
+          return SharedFunction.call('routeToSearch', author.label, [pluginName, 'cos'])
         },
         icon: SearchOutlined
       },
       search_video: {
         name: '搜索',
         call(author) {
-          return Utils.eventBus.SharedFunction.call('routeToSearch', author.label, [
-            pluginName,
-            'keyword'
-          ])
+          return SharedFunction.call('routeToSearch', author.label, [pluginName, 'keyword'])
         },
         icon: SearchOutlined
       }
@@ -213,7 +197,7 @@ void definePlugin({
   subscribe: {
     keyword: {
       getListStream: author =>
-        Utils.data.Stream.create<uni.item.Item>(async function* (signal, that) {
+        Stream.create<uni.item.Item>(async function* (signal, that) {
           const video = cosav.api.search.utils.video.createKeywordStream(author.label, 'mr')
           const comic = cosav.api.search.utils.comic.createKeywordStream(author.label, 'mr')
           signal.addEventListener('abort', () => {
@@ -243,8 +227,8 @@ void definePlugin({
 })
 
 const diff = async (
-  that: PluginConfigSubscribe,
-  olds: Parameters<PluginConfigSubscribe['getUpdateList']>[0],
+  that: Subscribe.Config,
+  olds: Parameters<Subscribe.Config['getUpdateList']>[0],
   signal?: AbortSignal
 ) => {
   const allList = await Promise.all(
@@ -272,3 +256,5 @@ const diff = async (
 
   return { isUpdated: isEmpty(changedAuthors), whichUpdated: changedAuthors }
 }
+
+export type CosavExpose = PluginExpose<() => typeof plugin>

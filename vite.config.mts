@@ -1,8 +1,8 @@
+import { deltaComic } from '@delta-comic/vite'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import browserslist from 'browserslist'
-import { deltaComic } from 'delta-comic-core/vite'
 import { browserslistToTargets } from 'lightningcss'
 import { fileURLToPath, URL } from 'node:url'
 import { NaiveUiResolver, VantResolver } from 'unplugin-vue-components/resolvers'
@@ -23,7 +23,7 @@ export default defineConfig(
             name: 'cosav',
             displayName: 'cos天堂',
             version: _package.version,
-            supportCoreVersion: '^1.1',
+            supportCoreVersion: '^2.0',
             author: _package.author.name,
             description: _package.description,
             require: [

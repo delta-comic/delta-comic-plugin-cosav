@@ -1,7 +1,7 @@
-import type { LayoutPlugin } from 'delta-comic-plugin-layout'
-
-import { declareDependType } from 'delta-comic-core'
+import type { LayoutLib } from 'delta-comic-plugin-layout'
 
 export const pluginName = 'cosav'
 
-export const layoutModule = declareDependType<LayoutPlugin>('layout')
+import { declareDepType } from '@delta-comic/plugin'
+
+export const layoutModule = declareDepType<LayoutLib>('layout')

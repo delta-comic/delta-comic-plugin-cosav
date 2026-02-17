@@ -1,4 +1,6 @@
-import { Utils, type PluginConfigSearchHotPageLevelboard } from 'delta-comic-core'
+import type { Search } from '@delta-comic/plugin'
+
+import { PromiseContent } from '@delta-comic/model'
 import { random } from 'es-toolkit/compat'
 
 import { cosavStore } from '@/store'
@@ -11,7 +13,6 @@ import { _cosavSearch } from '../search'
 import { cosavStream, createCommonComicToItem, createCommonVideoToItem } from './utils'
 
 export namespace _cosavApiSearch.utils.video {
-  const { PromiseContent } = Utils.data
   export const union = PromiseContent.fromAsyncFunction(
     async (
       params: Record<string, string>,
@@ -57,7 +58,6 @@ export namespace _cosavApiSearch.utils.video {
     cosavStream((page, signal) => byGroupId(groupId, page, sort, signal))
 }
 export namespace _cosavApiSearch.utils.comic {
-  const { PromiseContent } = Utils.data
   export const union = PromiseContent.fromAsyncFunction(
     async (
       params: Record<string, string>,
@@ -86,7 +86,6 @@ export namespace _cosavApiSearch.utils.comic {
 }
 
 export namespace _cosavApiSearch {
-  const { PromiseContent } = Utils.data
   export const getVideoRecommend = PromiseContent.fromAsyncFunction((signal?: AbortSignal) =>
     cosavStore.api
       .value!.get<_cosavVideo.RawCommonVideo[]>('/video/recommend', { signal })
@@ -136,5 +135,5 @@ export namespace _cosavApiSearch {
         content: () =>
           _cosavApiSearch.utils.comic.byKeyword('', undefined, 'mv').setProcessor(v => v.list)
       }
-    ] satisfies PluginConfigSearchHotPageLevelboard[]
+    ] satisfies Search.HotLevelboard[]
 }

@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import { cosav } from '@/api'
+import type { Search } from '@delta-comic/plugin'
 import { useResizeObserver, until } from '@vueuse/core'
-import { Comp, PluginConfigSearchTabbar, Store, Utils } from 'delta-comic-core'
 import { isEmpty } from 'es-toolkit/compat'
 import { computed, onMounted, ref, shallowRef } from 'vue'
 import { ComponentExposed } from 'vue-component-type-helpers'
 import { useRouter } from 'vue-router'
-const $props = defineProps<{ isActive: boolean; tabbar: PluginConfigSearchTabbar }>()
+import { DcContent, DcVar, DcWaterfall } from '@delta-comic/ui'
+import { useTemp } from '@delta-comic/core'
+import type { PromiseContent, RStream } from '@delta-comic/model'
+const $props = defineProps<{ isActive: boolean; tabbar: Search.Tabbar }>()
 const $router = useRouter()
 
-const list = shallowRef<ComponentExposed<typeof Comp.Waterfall>>()
-const temp = Store.useTemp()
+const list = shallowRef<ComponentExposed<typeof DcWaterfall>>()
+const temp = useTemp()
 const orderScrollSaveTemp = temp.$applyRaw(`orderCosavScoreSave`, () => new Map<string, number>())
 const containBound = ref<DOMRectReadOnly>()
 useResizeObserver(
@@ -30,7 +33,7 @@ const stop = $router.beforeEach(() => {
 
 const subCategoriesTemp = temp.$applyRaw(
   `orderVideoSubCategoriesTemp`,
-  () => new Map<string, Utils.data.PromiseContent<cosav.search.CategoriesSubItem[]>>()
+  () => new Map<string, PromiseContent<cosav.search.CategoriesSubItem[]>>()
 )
 const subCategories = computed(() => {
   if (!subCategoriesTemp.has($props.tabbar.id))
@@ -44,7 +47,7 @@ const subCategories = computed(() => {
 const selectTabId = shallowRef($props.tabbar.id)
 const subCategoriesStreamTemp = temp.$applyRaw(
   `orderVideoSubCategoriesStreamTemp`,
-  () => new Map<string, Utils.data.RStream<cosav.video.CosavVideo>>()
+  () => new Map<string, RStream<cosav.video.CosavVideo>>()
 )
 const subSource = computed(() => {
   if (!subCategoriesStreamTemp.has(selectTabId.value))
@@ -57,8 +60,8 @@ const subSource = computed(() => {
 </script>
 
 <template>
-  <Comp.Content :source="subCategories" ref="list" class="!size-full">
-    <Comp.Var
+  <DcContent :source="subCategories" ref="list" class="size-full!">
+    <DcVar
       :value="[
         { name: '全部', id: $props.tabbar.id },
         ...(subCategories.data.value?.map(v => ({ name: v.name, id: v.CHID })) ?? [])
@@ -67,11 +70,11 @@ const subSource = computed(() => {
     >
       <VanTabs v-model:active="selectTabId" class="size-full *:last:size-full">
         <VanTab v-for="sub of value" :title="sub.name" :name="sub.id" class="size-full">
-          <Comp.Waterfall :source="subSource" class="h-[calc(100%-45px)] w-full" v-slot="{ item }">
+          <DcWaterfall :source="subSource" class="h-[calc(100%-45px)] w-full" v-slot="{ item }">
             <Card :item free-height type="small" />
-          </Comp.Waterfall>
+          </DcWaterfall>
         </VanTab>
       </VanTabs>
-    </Comp.Var>
-  </Comp.Content>
+    </DcVar>
+  </DcContent>
 </template>

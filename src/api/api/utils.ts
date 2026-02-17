@@ -1,5 +1,5 @@
+import { Stream, type uni } from '@delta-comic/model'
 import dayjs from 'dayjs'
-import { Utils, type uni } from 'delta-comic-core'
 import { isString } from 'es-toolkit'
 import { isArray, isEmpty } from 'es-toolkit/compat'
 
@@ -221,7 +221,7 @@ export const cosavStream = <T>(
   api: (page: number, signal: AbortSignal) => PromiseLike<cosav.RawStream<T>>,
   size = 30
 ) => {
-  return Utils.data.Stream.create<T>(async function* (signal, that) {
+  return Stream.create<T>(async function* (signal, that) {
     while (true) {
       const result = await api(that.page.value, signal)
       that.page.value++

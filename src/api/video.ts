@@ -1,4 +1,6 @@
-import { uni } from 'delta-comic-core'
+import type {} from '@delta-comic/utils'
+
+import { uni } from '@delta-comic/model'
 
 export namespace _cosavVideo {
   export interface RawBaseVideo {
