@@ -1,3 +1,20 @@
+# [0.3.0](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.2.0...0.3.0) (2026-02-20)
+
+
+### Bug Fixes
+
+* fmt ([e58397a](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/e58397a840cf91f1fd56b478cde016c60381d48e))
+
+
+### Features
+
+* [pub] new core support ([5c07f25](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/5c07f25c5dc1b348c877a96d9894f79b8960f219))
+
+
+### Performance Improvements
+
+* 2.0 core ([1abf25e](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/1abf25ef799f4ec96fada3300ee15793bc1289bd))
+
 # [0.2.0](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.1.1...0.2.0) (2026-02-09)
 
 
