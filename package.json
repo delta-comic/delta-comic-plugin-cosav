@@ -24,14 +24,14 @@
     "typecheck": "vue-tsc --noEmit -p ./tsconfig.json --composite false"
   },
   "dependencies": {
-    "@delta-comic/core": "^0.2.0",
+    "@delta-comic/core": "^0.3.0",
     "@delta-comic/db": "^0.0.2",
     "@delta-comic/model": "^0.0.2",
-    "@delta-comic/plugin": "^0.0.3",
+    "@delta-comic/plugin": "^0.2.3",
     "@delta-comic/request": "^0.0.2",
-    "@delta-comic/ui": "^0.0.2",
+    "@delta-comic/ui": "^0.0.4",
     "@delta-comic/utils": "^0.0.3",
-    "@delta-comic/vite": "^0.0.2",
+    "@delta-comic/vite": "^0.1.1",
     "@vicons/antd": "^0.13.0",
     "@vicons/material": "^0.13.0",
     "@vueuse/core": "14.2.1",
@@ -43,11 +43,11 @@
     "naive-ui": "^2.43.2",
     "vant": "^4.9.22",
     "vue": "^3.5.28",
-    "vue-router": "^5.0.2"
+    "vue-router": "^5.0.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.1",
-    "@commitlint/config-conventional": "^20.4.1",
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
     "@commitlint/types": "^20.4.0",
     "@cspell/dict-npm": "^5.2.34",
     "@cspell/dict-rust": "^4.1.2",
@@ -55,7 +55,7 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^12.0.6",
     "@semantic-release/release-notes-generator": "^14.1.0",
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.0",
     "@types/crypto-js": "^4.2.2",
     "@vitejs/plugin-vue": "^6.0.4",
     "@vitejs/plugin-vue-jsx": "^5.1.4",
@@ -66,22 +66,24 @@
     "husky": "^9.1.7",
     "lightningcss": "^1.31.1",
     "lint-staged": "^16.2.7",
-    "oxfmt": "^0.32.0",
-    "oxlint": "^1.47.0",
-    "oxlint-tsgolint": "^0.13.0",
-    "prettier": "^3.8.1",
+    "oxfmt": "^0.34.0",
+    "oxlint": "^1.49.0",
+    "oxlint-tsgolint": "^0.14.1",
     "semantic-release": "^25.0.3",
     "semver": "^7.7.4",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.2.0",
     "typescript": "^5.9.3",
     "unplugin-vue-components": "31.0.0",
-    "vite": "8.0.0-beta.13",
+    "vite": "8.0.0-beta.14",
     "vite-plugin-external": "^6.2.2",
     "vite-plugin-monkey": "^7.1.9",
     "vue-component-type-helpers": "^3.2.4",
     "vue-tsc": "^3.2.4"
   },
   "pnpm": {
+    "overrides": {
+      "vite": "8.0.0-beta.14"
+    },
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "@tailwindcss/oxide",

@@ -1,10 +1,11 @@
+import { fileURLToPath, URL } from 'node:url'
+
 import { deltaComic } from '@delta-comic/vite'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import browserslist from 'browserslist'
 import { browserslistToTargets } from 'lightningcss'
-import { fileURLToPath, URL } from 'node:url'
 import { NaiveUiResolver, VantResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig, type UserConfigExport } from 'vite'
@@ -43,7 +44,7 @@ export default defineConfig(
         }
       },
       build: { sourcemap: false, minify: true, cssMinify: true },
-      server: { port: 6173 },
+      server: { port: 6173, host: true },
       base: '/'
     }) satisfies UserConfigExport
 )
