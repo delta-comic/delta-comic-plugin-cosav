@@ -24,7 +24,7 @@ export default defineConfig(
             name: 'cosav',
             displayName: 'cos天堂',
             version: _package.version,
-            supportCoreVersion: '^2.0',
+            supportCoreVersion: '^1.2',
             author: _package.author.name,
             description: _package.description,
             require: [
