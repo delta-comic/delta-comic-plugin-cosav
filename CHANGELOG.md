@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.3.0...0.3.1) (2026-02-22)
+
+
+### Bug Fixes
+
+* [pub] support version ([f9f685f](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/f9f685fd74a45c0a61d2cf4c0367c93b005d00a4))
+
 # [0.3.0](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.2.0...0.3.0) (2026-02-20)
 
 
