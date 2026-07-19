@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.4.0...0.4.1) (2026-07-19)
+
+
+### Bug Fixes
+
+* **forks:** 优化分流策略 ([aaf5fed](https://github.com/delta-comic/delta-comic-plugin-cosav/commit/aaf5fedc732ae125919e9904dee408980d763488))
+
 # [0.4.0](https://github.com/delta-comic/delta-comic-plugin-cosav/compare/0.3.1...0.4.0) (2026-07-19)
 
 
