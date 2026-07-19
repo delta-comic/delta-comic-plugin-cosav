@@ -29,6 +29,7 @@ export class CosavVideoPage extends ContentVideoPage {
               raw.video_url_vip
                 .concat(raw.video_url)
                 .map(v => ({ src: v, type: 'application/vnd.apple.mpegurl' }))
+                .toReversed()
             )
             return v
           })
